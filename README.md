@@ -1,2 +1,2 @@
-# springbootrestapi
-projeto de api rest utilizando spring boot
+# SpringBoot RestApi
+Projeto para estudo de uma RestApi Spring Boot
