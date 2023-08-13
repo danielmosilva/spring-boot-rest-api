@@ -16,7 +16,7 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-HELP.md
+#HELP.md
 #target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
