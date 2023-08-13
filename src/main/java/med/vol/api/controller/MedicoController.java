@@ -20,6 +20,13 @@ public class MedicoController {
     @Autowired
     private MedicoRepository repository;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhadosMedico> detalhar(@PathVariable Long id)
+    {
+        var medico = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhadosMedico(medico));
+    }
+
     @PostMapping
     @Transactional
     public ResponseEntity<DadosDetalhadosMedico> cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder)
