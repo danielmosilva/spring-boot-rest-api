@@ -1,6 +1,6 @@
-package med.vol.api.paciente;
+package med.vol.api.domain.paciente;
 
-import med.vol.api.endereco.DadosDetalhadosEndereco;
+import med.vol.api.domain.endereco.DadosDetalhadosEndereco;
 
 
 public record DadosDetalhadosPaciente(

@@ -1,7 +1,4 @@
-package med.vol.api.endereco;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+package med.vol.api.domain.endereco;
 
 public record DadosDetalhadosEndereco(
 
