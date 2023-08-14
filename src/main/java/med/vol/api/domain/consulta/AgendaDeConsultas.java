@@ -1,7 +1,8 @@
 package med.vol.api.domain.consulta;
 
 import med.vol.api.domain.ValidacaoException;
-import med.vol.api.domain.consulta.validacoes.ValidadorAgendamentoDeConsultas;
+import med.vol.api.domain.consulta.validacoes.agendamento.ValidadorAgendamentoDeConsultas;
+import med.vol.api.domain.consulta.validacoes.cancelamento.ValidadorCancelamentoDeConsulta;
 import med.vol.api.domain.medico.Medico;
 import med.vol.api.domain.medico.MedicoRepository;
 import med.vol.api.domain.paciente.PacienteRepository;
@@ -23,7 +24,10 @@ public class AgendaDeConsultas {
     private PacienteRepository pacienteRepository;
 
     @Autowired
-    private List<ValidadorAgendamentoDeConsultas> validadores;
+    private List<ValidadorAgendamentoDeConsultas> validadoresAgendamento;
+
+    @Autowired
+    private List<ValidadorCancelamentoDeConsulta> validadoresCancelamento;
 
     public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados){
 
@@ -34,7 +38,7 @@ public class AgendaDeConsultas {
             throw new ValidacaoException("Não foi possivel efetuar o agendamento pois o id do paciente não existe");
 
 
-        validadores.forEach( v -> v.validar(dados));
+        validadoresAgendamento.forEach(v -> v.validar(dados));
 
         var medico = escolherMedico(dados);
 
@@ -64,6 +68,8 @@ public class AgendaDeConsultas {
         if (!consultaRepository.existsById(dados.idConsulta())) {
             throw new ValidacaoException("Id da consulta informado não existe!");
         }
+
+        validadoresCancelamento.forEach(v -> v.validar(dados));
 
         var consulta = consultaRepository.getReferenceById(dados.idConsulta());
         consulta.cancelar(dados.motivo());
