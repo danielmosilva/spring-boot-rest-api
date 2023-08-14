@@ -39,7 +39,7 @@ public class TokenService {
     {
         try {
             var algorithm = Algorithm.HMAC256(secret);
-            System.out.println(tokenJWT);
+
             return JWT.require(algorithm)
                     .withIssuer("spring-boot-rest-api")
                     .build()
