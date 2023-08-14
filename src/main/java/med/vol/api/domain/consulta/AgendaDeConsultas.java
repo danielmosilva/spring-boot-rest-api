@@ -25,7 +25,7 @@ public class AgendaDeConsultas {
     @Autowired
     private List<ValidadorAgendamentoDeConsultas> validadores;
 
-    public void agendar(DadosAgendamentoConsulta dados){
+    public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados){
 
         if(dados.idMedico() != null && !medicoRepository.existsById(dados.idMedico()))
             throw new ValidacaoException("Não foi possivel efetuar o agendamento pois o id do médico não existe");
@@ -41,6 +41,7 @@ public class AgendaDeConsultas {
         var consulta = new Consulta(null, medico, paciente, dados.data(),null);
 
         consultaRepository.save(consulta);
+        return new DadosDetalhamentoConsulta(consulta);
     }
 
     private Medico escolherMedico(DadosAgendamentoConsulta dados) {
