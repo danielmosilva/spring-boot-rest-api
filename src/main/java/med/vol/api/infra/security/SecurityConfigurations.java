@@ -30,6 +30,9 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(req -> {
                     //req.requestMatchers(HttpMethod.POST, "/adm").hasRole("ADMIN");
                     req.requestMatchers(HttpMethod.POST, "/login").permitAll();
+                    req.requestMatchers("/v3/api-docs/**").permitAll();
+                    req.requestMatchers("/swagger-ui.html").permitAll();
+                    req.requestMatchers("/swagger-ui/**").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
